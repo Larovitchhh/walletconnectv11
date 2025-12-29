@@ -1,17 +1,16 @@
-# A Blank Project
+Artículo: "Reown Bridge - Lightning Swaps on Stacks"
+1. The Power of Submarine Swaps
+Lightning Swaps (or Submarine Swaps) are the secret sauce of Bitcoin's scalability. They allow for atomic exchanges between Stacks (L1/L2) and Bitcoin's Lightning Network. By using a Hashed Timelock Contract (HTLC), we ensure that no party can cheat.
 
-This blank project conforms to [Clarinet-compliant](https://docs.hiro.so/clarinet/how-to-guides/how-to-create-new-project) project structure. 
+2. Reown & AppKit: A Modern Interface
+Integrating this with Reown AppKit changes the game. Instead of complex command-line tools, users get a "Bridge" interface. AppKit handles the connection to the Stacks wallet, while the contract manages the security of the funds.
 
-## Build your Contract
+3. Fee Incentives for Providers
+Our v11 introduces a fee parameter. This allows liquidity providers to earn a profit for facilitating the swap, creating a decentralized economy of "bridgers" within your dApp.
 
-You can start your journey by reviewing the project structure, particularly the [Clarinet.toml](/examples/blank-project/Clarinet.toml). 
+4. The Technical Script (HTLC Logic)
+The contract uses the sha256 opcode to lock funds. The STX are only released if the provider presents the preimage (the secret) that matches the hash. If the provider disappears, the initiator can safely refund their STX after the timelock expires.
 
-+ Start by adding a new contract using [Clarinet](https://docs.hiro.so/stacks/clarinet)
-+ Navigate to the `/contracts` folder to review or iterate your contract's business logic
-+ Navigate to `/tests` to build the test harness
-
-## Test your Contract
-
-+ You can manually test your your contracts in the [Clarinet console](https://docs.hiro.so/clarinet/how-to-guides/how-to-test-contract#load-contracts-in-a-console).
-+ You can programmatically test your contracts with [unit tests](https://docs.hiro.so/clarinet/how-to-guides/how-to-test-contract).
+5. Real-Time Event Tracking
+Using Clarity's print function, this contract emits events that AppKit can listen to. This allows the frontend to show real-time updates: "Swap Locked", "Waiting for Bitcoin", or "STX Claimed".
 
